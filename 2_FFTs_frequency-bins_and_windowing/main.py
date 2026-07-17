@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 Fs = 1 # Hz
 N = 100 # Pts to simulate & FFT size
 
-# [END CONFIG] ================================================================
+# [END CONFIG]
 
 
 
@@ -21,7 +21,7 @@ S = np.fft.fftshift(S_unshifted)
 S_mag = np.abs(S)
 S_phase = np.angle(S)
 
-# [END SIMULATION] ============================================================
+# [END SIMULATION]
 
 
 
@@ -45,4 +45,4 @@ ax_phase.set_ylabel('FFT Phase [radians]')
 ax_phase.plot(f,S_phase,'.-')
 plt.show()
 
-# [END PLOTTING] ==============================================================
+# [END PLOTTING]
