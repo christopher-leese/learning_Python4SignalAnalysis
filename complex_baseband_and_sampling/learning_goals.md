@@ -45,6 +45,7 @@ Generate: `x[n]=e^(j2πf_0n/(fs))`. Then:
 # 3. Theory Question
 - Why is a complex signal at −100 kHz is distinguishable from one at +100 kHz?
     - Because of the way that we measure them relative to the tuning frequency. A frequency < the tuning frequency will be observed as "negative" because that represents opposite direction of phase rotation. In complex baseband, that direction tells us whether the signal is above or below the tuning frequency.
+        - Negative frequencies do not actually exist when it comes to transmitting/receiving RF signals.
     - Behaviorally, a frequency < the tuning frequency will:
         - have the In-phase (I) component lagging the Quadrature (Q) component by 90deg when visualized
         - appear to rotate clockwise on the real-complex plane
