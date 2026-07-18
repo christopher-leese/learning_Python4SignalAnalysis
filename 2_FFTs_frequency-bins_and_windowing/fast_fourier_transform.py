@@ -5,13 +5,15 @@ import matplotlib.pyplot as plt
 # Assuming sample rate of 1Hz for simplicity
 # Expect left bound to be -0.5Hz, right bound to be 0.5Hz
 Fs = 1 # Hz
-N = 100 # Pts to simulate & FFT size
+N = 1024 # Pts to simulate & FFT size
 
 # [END CONFIG]
 
 
 
 # [SIMULATION] ================================================================
+n = np.arange(N);
+
 # Set up time steps and sine simulation
 t = np.arange(N)
 s = np.sin(0.15*2*np.pi*t) # sine wave with 0.15 Hz frequency
