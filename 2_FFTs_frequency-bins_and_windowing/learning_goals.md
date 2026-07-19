@@ -60,7 +60,7 @@ Then, repeat with a tone that does not fall exactly on an FFT bin:
 - Two different FFT lengths
     - Done, observed greater precision in peak location, but for very close frequencies, it appears as one single peak. So resolution does not improve with greater FFT length.
 
-# 3. Theory Question
+# 3. Concept Question
 Can you predict the FFT-bin spacing before running the code? Can you distinguish frequency resolution from zero-padding or visual interpolation?
 - We can predict FFT bin spacing by looking at our sample points quantity (N) and sample rate (Fs). Bin spacing is defined as Fs/N [Hz]. Bin spacing is also known as our frequency resolution.
     - Not to be mistaken by N/Fs, which tells us our observation duration in seconds.

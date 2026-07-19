@@ -42,7 +42,7 @@ Generate: `x[n]=e^(j2πf_0n/(fs))`. Then:
 - Choose f_0 above Nyquist and observe aliasing
     - Done, matches what I saw on PySDR where too-low sample rate causes ambiguity and mismatched reconstructions of the func
     
-# 3. Theory Question
+# 3. Concept Question
 - Why is a complex signal at −100 kHz is distinguishable from one at +100 kHz?
     - Because of the way that we measure them relative to the tuning frequency. A frequency < the tuning frequency will be observed as "negative" because that represents opposite direction of phase rotation. In complex baseband, that direction tells us whether the signal is above or below the tuning frequency.
         - Negative frequencies do not actually exist when it comes to transmitting/receiving RF signals.
