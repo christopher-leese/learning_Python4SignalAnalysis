@@ -46,7 +46,7 @@ t       = n/Fs
 
 # Create complex tone
 x       = np.exp(1j * 2 * np.pi * f * t)
-x_pwr  = np.mean(np.abs(x)**2)
+x_pwr   = np.mean(np.abs(x)**2)
 
 # Set up complex Gaussian noise at goal SNRs and add
 rng = np.random.default_rng()
