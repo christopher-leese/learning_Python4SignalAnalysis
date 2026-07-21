@@ -1,4 +1,4 @@
-# learning Python for Signal Analysis (P4SA)
+# Learning Python for Signal Analysis (P4SA)
 Learning and experimenting with PySDR, SciPy, and SigMF for a synthetic burst detector / annotator project... Primarily notes and exercise records. Folders separate topics in order of coverage.
 
 ## Quickstart
