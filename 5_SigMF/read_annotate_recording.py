@@ -1,6 +1,4 @@
-import numpy as np
 import sigmf
-import json
 
 
 # Write one synthetic cf32_le recording and metadata file.
@@ -8,13 +6,20 @@ import json
 # verify the sample count, and add one manually known annotation.
 
 # model:
-#   INPUTS: recording
+#   INPUTS: recording filename, sample_start, sample_count,
+#           freq_lower_edge, freq_upper_edge, label_name
+#       TRADE STUDY:
+#           compared sample count to duration, duration req Fs,
+#           possible but just not within this scope
+#
+#       REQUIRES: file to be in same folder as read_annotate_recording.py
 #       -> flow into config
+#   OUTPUTS: annotated file recording as "filename-annotated.sigmf-meta"
 #   
 #   PROCESSING SERVICE:
 #       
 #       Reload through Python library:
-#           Set up Recording instance "recording-read"
+#           Set up input Recording instance "recording"
 #               REQUIRES:
 #                   Both data and metadata base filenames are "recording"
 #                   JSON object looks like:
@@ -44,20 +49,59 @@ import json
 #                   label FOR annotation label
 #                   generator FOR recording entity that created annotation
 #
+#               Properties inside Annotations:
+#                   sample_start
+#                   sample_count
+#                   freq_lower_edge
+#                   freq_upper_edge
 
 
 # [CONFIG] --------------------------------------------------------------------
+recording_name:str = "recording"
+label_name:str = "signal of interest"
+
+sample_start = 0
+sample_count = 32768
+freq_lower_edge = 15
+freq_upper_edge = 17
 
 # [END CONFIG]
 
 
 
 # [PROCESSING] ----------------------------------------------------------------
+recording = sigmf.fromfile(f"{recording_name}.sigmf-meta")
+
+samples = recording.read_samples()
+sample_qty = len(samples)
+
+assert(sample_start >= 0)
+assert(sample_count <= sample_qty - sample_start)
+
+try:
+    recording.add_annotation(
+        start_index=sample_start,
+        length=sample_count,
+        metadata=
+        {
+            "core:label": label_name,
+        },
+    )
+except Exception as e:
+    print(f"Error: {e}")
+
+try:
+    recording.tofile(f"{recording_name}.sigmf-meta", overwrite=True)
+    print(f"Successfully wrote annotation for '{recording_name}'!")
+except Exception as e:
+    print(f"Error: {e}")
 
 # [END PROCESSING]
 
 
 
 # [UI SERVICE] ----------------------------------------------------------------
+print(f"Samples = {sample_qty}")
+print(f"Annotations = {recording.get_annotations()}")
 
 # [END UI SERVICE]

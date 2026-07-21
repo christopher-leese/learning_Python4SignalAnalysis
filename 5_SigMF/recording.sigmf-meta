@@ -1,0 +1,23 @@
+{
+    "global": {
+        "core:datatype": "cf32_le",
+        "core:num_channels": 1,
+        "core:offset": 0,
+        "core:sample_rate": 16384,
+        "core:sha512": "5f3e9b6fd63f76b8b72ead2820d782b8bd2ea64777540af2fa77f6d1c013f284c969019eec08ede9665b01a434c405d8ac083b9355fbf4692307fae6c4ea255c",
+        "core:version": "1.2.6"
+    },
+    "captures": [
+        {
+            "core:frequency": 16,
+            "core:sample_start": 0
+        }
+    ],
+    "annotations": [
+        {
+            "core:label": "signal of interest",
+            "core:sample_count": 32768,
+            "core:sample_start": 0
+        }
+    ]
+}

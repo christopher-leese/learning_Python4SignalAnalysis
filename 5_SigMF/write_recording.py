@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sigmf
-import json
 
 
 # Write one synthetic cf32_le recording and metadata file.
@@ -23,6 +22,7 @@ import json
 #               Assign complex signal to above format array var
 #
 #       Create a metadata file
+#           REVISION: INTEGRATED WITH Recording
 #           REQUIRES:
 #               Accomplished via Recording instance
 #               Extension recording.sigmf-meta
@@ -31,8 +31,8 @@ import json
 #                   global, captures, and annotations
 #               If a name/value pair applies to a particular segment,
 #               then it MUST appear in that segment
-#       
-#       Set up Recording instance "recording-write"
+#
+#       Set up Recording instance "recording"
 #           REQUIRES:
 #               sigmf.fromarray(samples) FOR complex signal array samples
 #               recording.sample_rate = Fs
@@ -51,9 +51,11 @@ import json
 #                   freq_lower_edge
 #                   freq_upper_edge
 #                   --> expecting all of this to be empty, adding it later
-#       
-#
+
+
+
 # [CONFIG] --------------------------------------------------------------------
+filename:str = "recording"
 Fs = 16384 # semi-arbitrary 2^14 so kHz example frequencies < nyquist
 f = 16 # Hz
 recording_duration = 2 # seconds
@@ -69,14 +71,37 @@ qty_samples = Fs * recording_duration
 t = np.arange(qty_samples)/Fs
 
 x = np.exp(1j * 2 * np.pi * f * t)
-signal = x.astype('<c8').view('<f4') # want signal cf32_le
-# ^ using .view for memory efficiency
-#   REQUIRES:
-#       byte qty in array to be / by new data type size
-#       data to be contiguous
+samples = x.astype('<c8') # want signal cf32_le, c8 inferred as cf32.
 
+# Set up recording
+recording = sigmf.fromarray(samples)
+recording.sample_rate = Fs
+
+recording.add_capture(
+    start_index=0,
+    metadata={
+        sigmf.FREQUENCY_KEY: f,
+    }
+)
+
+# Write samples and recording metadata with try/except
+try:
+    recording.tofile(f"{filename}.sigmf-meta",overwrite=True)
+    print(f"Successfully wrote metadata for '{filename}'!")
+    samples.tofile(f"{filename}.sigmf-data")
+    print(f"Successfully wrote data for '{filename}'!")
+except Exception as e:
+    print(f"Error: {e}")
+
+
+# [END SIMULATION]
+
+
+
+# [UI SERVICE] ----------------------------------------------------------------
 
 # (DEBUG) check signal in time domain
+print("[DEBUG] CONTENT")
 fig, ax = plt.subplots(figsize=(11, 4))
 ax.plot(t, np.real(x), label="Real")
 ax.plot(t, np.imag(x), label="Imaginary")
@@ -86,11 +111,6 @@ ax.set_title("Signal x, Real vs Imaginary")
 ax.legend()
 fig.tight_layout()
 plt.show()
-
-# [END SIMULATION]
-
-
-
-# [UI SERVICE] ----------------------------------------------------------------
+print(recording.dumps(pretty=True))
 
 # [END UI SERVICE]
