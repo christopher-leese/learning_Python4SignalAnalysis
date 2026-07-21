@@ -18,11 +18,11 @@ cd learning_P4SA
 python3 -m venv .venv
 ```
 
-3. Install the needed dependencies:
+3. Install the needed dependencies (using pip in my case):
 
 ```bash
 ./.venv/bin/python -m pip install --upgrade pip
-./.venv/bin/python -m pip install numpy matplotlib
+./.venv/bin/python -m pip install numpy matplotlib scipy SigMF
 ```
 
 Now, any of the project sections can be ran in our virtual environment. Below is an example of the `complex_baseband_and_sampling` folder:
