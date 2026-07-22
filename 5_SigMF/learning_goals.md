@@ -60,5 +60,5 @@ Write one synthetic cf32_le recording and metadata file. Reload it through the P
 
 # 3. Concept Question
 How do you make a fresh script that validates and reopens your recording without hard-coded knowledge that exists only in the generation script?
-
-TODO!!!!
+- The script MUST check the hash of the recording and compare it to the metadata.
+- The script MUST use SigMF's fromfile and read_samples to reopen the recording.
