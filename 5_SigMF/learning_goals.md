@@ -52,6 +52,13 @@ This includes learning goals for this topic and my notes on it.
 
 # 2. Exercise
 Write one synthetic cf32_le recording and metadata file. Reload it through the Python library, verify the sample count, and add one manually known annotation.
+- Done, pretty cool!
+- Lessons learned:
+    - There does not exist a complex float 32 in numpy, so used complex 8-byte (64 bit) which was inferred as cf32 by SigMF.
+    - To determine endianness, we use < or >.
+    - Good practice separating write and read, no God files/funcs.
 
 # 3. Concept Question
 How do you make a fresh script that validates and reopens your recording without hard-coded knowledge that exists only in the generation script?
+
+TODO!!!!
