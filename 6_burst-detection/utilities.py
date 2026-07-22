@@ -41,7 +41,10 @@ def get_SNR_info(signal_timedomain:np.ndarray, noise_timedomain:np.ndarray, verb
     SNR_dB = 10*np.log10(sig_pwr / nse_pwr)
 
     if (verbose):
-        print(f"sig pwr = {sig_pwr}\nnse pwr = {nse_pwr}\nnet pwr = {net_pwr}\nSNR = {SNR_dB} dB")
+        print(f"signal = {10*np.log10(sig_pwr):.3f} dB")
+        print(f"noise = {10*np.log10(nse_pwr):.3f} dB")
+        print(f"net = {10*np.log10(net_pwr):.3f} dB")
+        print(f"SNR = {SNR_dB:.3f} dB")
 
     info = np.array(
         [sig_pwr, nse_pwr, net_pwr, SNR_dB],

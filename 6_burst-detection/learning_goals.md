@@ -27,14 +27,17 @@ Specific to detection theory
     - Specifically want to measure Probability of Detection and Probability of False Alarm
 - Lowering detection criterion raises both hit and false-alarm rates, while raising it lowers both.
 - Overlaying probability density curves for FA and hit wrt a common metric (e.g. voltage) lets us inform how we move the threshold
-- https://www.cns.nyu.edu/~david/courses/perception/lecturenotes/sdt/sdt.html
+- https://www.ll.mit.edu/sites/default/files/outreach/doc/2018-07/lecture%205.pdf
 
 # 2. Exercise
 Use a frame-energy detector to detect bursts. For frames `m` of length `L`, energy is defined as: `E[m] = 1/L * sum of |x[n]|^2 from (n = mL) to mL+L-1`
 Then:
 1. Estimate the noise floor from known noise-only synthetic frames.
+    - Done
 2. Select a threshold above the noise floor.
+    - Done
 3. Mark frames above the threshold.
+    - TODO
 4. Merge contiguous marked frames.
 5. Convert frame indices back to sample indices.
 6. Measure errors against exact synthetic start and stop samples.
